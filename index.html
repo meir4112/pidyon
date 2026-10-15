@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>פדיון הבן – אריאל עושרי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0d2f3a; --teal:#17566a; --parch:#f9edc9; --cream:#fdf6e0;
+  --gold:#d4a24a; --gold2:#f3d58a; --brown:#7a4a22; --ink:#17323a;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Frank Ruhl Libre","David Libre",Georgia,serif;color:var(--cream);
+  background:radial-gradient(1200px 700px at 80% -10%,#1f6a7d55,transparent),
+             radial-gradient(900px 700px at 0% 40%,#7a4a2233,transparent),
+             linear-gradient(180deg,#0d2f3a,#0a2229 60%,#0d2f3a);
+  background-attachment:fixed;overflow-x:hidden;line-height:1.7;
+}
+#dust{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main{position:relative;z-index:1}
+section{padding:clamp(40px,8vw,90px) 20px;display:flex;flex-direction:column;align-items:center}
+
+/* hero: invitation */
+.hero{min-height:100svh;justify-content:center;padding-top:28px}
+.invite{
+  width:min(560px,92vw);border-radius:18px;position:relative;
+  box-shadow:0 40px 90px #000a,0 0 0 1px #d4a24a55,0 0 80px #d4a24a22;
+  animation:rise 1.6s cubic-bezier(.16,.8,.2,1) both,float 7s ease-in-out 1.6s infinite;
+  transform-style:preserve-3d;will-change:transform;
+}
+.invite img{display:block;width:100%;height:auto;border-radius:18px}
+.invite::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;
+  background:linear-gradient(115deg,transparent 35%,#fff5 50%,transparent 65%);
+  background-size:250% 100%;animation:sheen 6s ease-in-out 2s infinite;mix-blend-mode:soft-light}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.94);filter:blur(14px)}to{opacity:1;transform:none;filter:none}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@keyframes sheen{0%{background-position:120% 0}60%,100%{background-position:-120% 0}}
+.scroll-hint{margin-top:26px;color:var(--gold2);font-size:1rem;opacity:.85;animation:float 2.4s ease-in-out infinite;text-align:center}
+.scroll-hint i{display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--gold2),transparent)}
+
+/* logo */
+.logo-wrap{perspective:900px;width:min(420px,84vw);position:relative}
+.logo{
+  aspect-ratio:1;border-radius:26px;overflow:hidden;position:relative;
+  box-shadow:0 30px 70px #000a,0 0 0 1px #d4a24a66;
+  clip-path:circle(0% at 50% 50%);transition:clip-path 1.8s cubic-bezier(.2,.8,.2,1),transform .25s ease-out;
+  transform-style:preserve-3d;
+}
+.logo.in{clip-path:circle(80% at 50% 50%)}
+.logo img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.25);transition:transform 2.4s cubic-bezier(.2,.8,.2,1)}
+.logo.in img{transform:scale(1)}
+.logo .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),#fff6,transparent 45%);mix-blend-mode:soft-light}
+.ring{position:absolute;inset:-14px;border-radius:34px;border:1px solid #d4a24a55;pointer-events:none;
+  opacity:0;transition:opacity 2s 1s;animation:pulse 4s ease-in-out infinite}
+.logo-wrap.in .ring{opacity:1}
+@keyframes pulse{50%{transform:scale(1.03);border-color:#f3d58a99}}
+.tagline{margin-top:34px;font-size:clamp(1.15rem,3.6vw,1.5rem);color:var(--gold2);text-align:center;max-width:30ch}
+
+/* details */
+.details{display:grid;gap:14px;width:min(560px,92vw)}
+.glass{
+  background:linear-gradient(160deg,#1f7a8e55,#17566a40);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);
+  border:1px solid #f3d58a55;box-shadow:0 20px 60px #0008,inset 0 1px 0 #ffffff22;color:var(--cream);
+}
+.card{border-radius:18px;padding:20px 22px;display:flex;gap:16px;align-items:center}
+.card b{display:block;color:var(--gold2);font-size:1.2rem;font-weight:900}
+.card span{font-size:1.05rem}
+.card .ic{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#d4a24a33;border:1px solid var(--gold);color:var(--gold2);font-size:1.3rem}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.actions a{
+  flex:1;min-width:140px;text-align:center;text-decoration:none;font:inherit;font-weight:700;
+  padding:12px 14px;border-radius:12px;color:var(--cream);border:1px solid var(--gold);
+  background:#0d2f3acc;transition:background .3s,color .3s,transform .3s;
+}
+.actions a:hover{background:var(--gold);color:var(--deep);transform:translateY(-2px)}
+
+/* form */
+h2{font-size:clamp(1.9rem,6vw,2.6rem);font-weight:900;color:var(--gold2);text-align:center;margin-bottom:6px}
+form{width:min(560px,92vw);padding:clamp(22px,5vw,34px);border-radius:24px;position:relative}
+label{display:block;font-weight:700;color:var(--gold2);margin:16px 0 6px}
+input[type=text],textarea{
+  width:100%;font:inherit;font-size:1.08rem;color:var(--cream);padding:12px 14px;border-radius:12px;
+  background:#0d2f3a66;border:1.5px solid #f3d58a66;outline:none;transition:border-color .25s,box-shadow .25s;
+}
+textarea{resize:vertical;min-height:80px}
+input:focus,textarea:focus{border-color:var(--gold2);box-shadow:0 0 0 4px #d4a24a44}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px}
+.choice input{position:absolute;opacity:0}
+.choice label{margin:0;text-align:center;padding:12px;border-radius:12px;border:1.5px solid #f3d58a77;cursor:pointer;color:var(--cream);transition:.25s;background:#0d2f3a55}
+.choice input:checked+label{background:var(--gold);color:var(--deep);border-color:var(--gold2);box-shadow:0 8px 20px #d4a24a44}
+.choice input:focus-visible+label{outline:3px solid var(--teal);outline-offset:2px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:18px}
+.stepper button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold2);background:#0d2f3a55;color:var(--gold2);font-size:1.5rem;cursor:pointer;transition:.2s}
+.stepper button:hover{background:var(--gold);color:var(--deep)}
+.stepper output{min-width:2ch;text-align:center;font-size:2rem;font-weight:900;color:var(--gold2)}
+.send{
+  margin-top:26px;width:100%;padding:15px;border:0;border-radius:14px;font:inherit;font-size:1.2rem;font-weight:900;cursor:pointer;
+  color:var(--deep);background:linear-gradient(135deg,#f3d58a,#d4a24a);box-shadow:0 12px 30px #d4a24a44;
+  transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;
+}
+.send:hover{transform:translateY(-2px);box-shadow:0 18px 40px #0d2f3a88}
+.send:disabled{opacity:.7;cursor:wait}
+.err{color:#ffb4a8;font-weight:700;margin-top:12px;text-align:center;min-height:1.4em}
+.thanks{text-align:center;padding:10px 0;display:none;flex-direction:column;align-items:center}
+.thanks .actions{width:100%;margin:22px 0 34px}
+.thanks .tagline{margin-top:30px}
+.thanks h3{font-size:2rem;color:var(--gold2);margin-bottom:8px}
+.thanks p{font-size:1.15rem}
+form.done .fields{display:none}
+form.done .thanks{display:flex;animation:rise 1.2s both}
+.hide{display:none!important}
+footer{padding:50px 20px 70px;text-align:center;color:var(--gold2);font-size:1.3rem;font-weight:700}
+
+/* cursor */
+@media (hover:hover) and (pointer:fine){
+  body.cur,body.cur *{cursor:none!important}
+  .c-dot,.c-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:99;border-radius:50%;opacity:0}
+  .c-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--gold2);box-shadow:0 0 14px 3px #f3d58a}
+  .c-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid #f3d58aaa;transition:width .3s,height .3s,margin .3s,background .3s,border-color .3s}
+  .c-ring.big{width:68px;height:68px;margin:-34px 0 0 -34px;background:#d4a24a22;border-color:var(--gold2)}
+  body.cur.moved .c-dot,body.cur.moved .c-ring{opacity:1}
+}
+@media (hover:none),(pointer:coarse){.c-dot,.c-ring{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.logo{clip-path:none}}
+</style>
+</head>
+<body class="cur">
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="c-dot"></div><div class="c-ring"></div>
+
+<main>
+  <!-- ההזמנה – ישר בכניסה -->
+  <section class="hero">
+    <div class="invite" id="invite"><img src="invitation.jpg" alt="הזמנה לפדיון הבן של אריאל – מוצ״ש פרשת לך לך, 24/10/26, באולמי אוהלי מרים, מודיעין עילית, 21:30"></div>
+    <div class="scroll-hint">אישור הגעה<i></i></div>
+  </section>
+
+  <!-- פרטים -->
+  <section>
+    <div class="details">
+      <div class="card glass"><div class="ic">✡</div><div><b>מתי?</b><span>מוצ״ש פרשת לך לך · אור לי״ד חשון<br>24/10/26 למניינם · בשעה 21:30</span></div></div>
+      <div class="card glass"><div class="ic">❖</div><div><b>איפה?</b><span>אולמי אוהלי מרים<br>רח׳ אביי ורבא פינת רבי טרפון, מודיעין עילית</span></div></div>
+      <div class="actions">
+        <a class="waze" href="#" target="_blank" rel="noopener">ניווט ב-Waze</a>
+        <a class="gmaps" href="#" target="_blank" rel="noopener">ניווט ב-Google Maps</a>
+        <a id="gcal" href="#" target="_blank" rel="noopener">הוספה ליומן</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- אישור הגעה -->
+  <section id="rsvp">
+    <h2>נשמח לראותכם</h2>
+    <form id="form" class="glass" novalidate>
+      <div class="fields">
+        <label for="name">שם מלא</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+
+        <label>האם תגיעו?</label>
+        <div class="choice">
+          <div><input type="radio" name="att" id="yes" value="yes" checked><label for="yes">מגיעים בעז״ה</label></div>
+          <div><input type="radio" name="att" id="no" value="no"><label for="no">לא נוכל להגיע</label></div>
+        </div>
+
+        <div id="countBox">
+          <label>כמה אתם?</label>
+          <div class="stepper">
+            <button type="button" id="minus" aria-label="פחות">−</button>
+            <output id="count">1</output>
+            <button type="button" id="plus" aria-label="יותר">+</button>
+          </div>
+        </div>
+
+        <label for="msg">ברכה לבעלי השמחה</label>
+        <textarea id="msg" name="msg"></textarea>
+
+        <div class="err" id="err" role="alert"></div>
+        <button class="send" id="send" type="submit">שליחת אישור הגעה</button>
+      </div>
+      <div class="thanks" id="thanks">
+        <h3>תודה רבה!</h3>
+        <p id="thanksTxt">נשמח לראותכם בשמחה.</p>
+        <div class="actions">
+          <a class="waze" href="#" target="_blank" rel="noopener">ניווט ב-Waze</a>
+          <a class="gmaps" href="#" target="_blank" rel="noopener">ניווט ב-Google Maps</a>
+        </div>
+        <div class="logo-wrap" id="logoWrap">
+          <div class="ring"></div>
+          <div class="logo" id="logo"><img src="logo.jpg" alt="לוגו פדיון הבן – אריאל עושרי"><div class="glare"></div></div>
+        </div>
+        <p class="tagline">בשמחתכם ישמח ליבנו גם אנו<br><span style="color:var(--cream)">מאיר &amp; ברכי עושרי</span></p>
+      </div>
+    </form>
+  </section>
+
+  <footer>מזל טוב · מאיר &amp; ברכי עושרי</footer>
+</main>
+
+<script>
+/* ============ הגדרות ============ */
+const CONFIG = {
+  // אפשרות 1 (מומלצת): כתובת Proxy משלכם (למשל Cloudflare Worker) שמחזיק את הטוקן בצד שרת.
+  PROXY_URL: "",
+  // אפשרות 2: ישיר לטלגרם. שימו לב: הטוקן יהיה גלוי בקוד האתר.
+  TELEGRAM_BOT_TOKEN: "PUT_YOUR_BOT_TOKEN_HERE",
+  TELEGRAM_CHAT_ID: "PUT_YOUR_CHAT_ID_HERE",
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+/* ============ קישורים ============ */
+const MAPS = "https://maps.app.goo.gl/amgqJUJ9M7x4FU9j9";
+document.querySelectorAll(".gmaps").forEach(a => a.href = MAPS);
+document.querySelectorAll(".waze").forEach(a => a.href = "https://waze.com/ul?q=" + encodeURIComponent("אולמי אוהלי מרים, אביי ורבא, מודיעין עילית") + "&navigate=yes");
+$("#gcal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
+  encodeURIComponent("פדיון הבן – אריאל עושרי") +
+  "&dates=20261024T213000/20261025T000000&ctz=Asia/Jerusalem&location=" +
+  encodeURIComponent("אולמי אוהלי מרים, אביי ורבא פינת רבי טרפון, מודיעין עילית");
+
+/* ============ אבק זהב רך ברקע ============ */
+const cv = $("#dust"), cx = cv.getContext("2d");
+let W, H, P = [];
+function size(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
+addEventListener("resize", size); size();
+for (let i = 0; i < 55; i++) P.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*2+.4, v:Math.random()*.25+.05, a:Math.random()*6.28, o:Math.random()*.5+.15});
+const sparks = [];
+(function loop(){
+  cx.clearRect(0,0,W,H);
+  for (const p of P){
+    p.y -= p.v; p.a += .01; p.x += Math.sin(p.a)*.25;
+    if (p.y < -5){ p.y = H+5; p.x = Math.random()*W; }
+    cx.beginPath(); cx.fillStyle = `rgba(243,213,138,${p.o*(.6+.4*Math.sin(p.a*3))})`;
+    cx.arc(p.x,p.y,p.r,0,6.28); cx.fill();
+  }
+  for (let i = sparks.length-1; i >= 0; i--){
+    const s = sparks[i]; s.x += s.vx; s.y += s.vy; s.vy += .02; s.l -= .02;
+    if (s.l <= 0){ sparks.splice(i,1); continue; }
+    cx.beginPath(); cx.fillStyle = `rgba(255,236,170,${s.l})`; cx.arc(s.x,s.y,s.r*s.l,0,6.28); cx.fill();
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ============ סמן עכבר ============ */
+const dot = $(".c-dot"), ring = $(".c-ring");
+let mx = 0, my = 0, rx = 0, ry = 0, last = 0;
+addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse") return;
+  mx = e.clientX; my = e.clientY; document.body.classList.add("moved");
+  dot.style.transform = `translate(${mx}px,${my}px)`;
+  const t = performance.now();
+  if (t - last > 40){ last = t;
+    sparks.push({x:mx,y:my,vx:(Math.random()-.5)*.8,vy:Math.random()*-.6,r:Math.random()*3+1.5,l:1}); }
+});
+(function follow(){ rx += (mx-rx)*.15; ry += (my-ry)*.15; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(follow); })();
+document.addEventListener("pointerover", e => { if (e.target.closest("a,button,label,input,textarea")) ring.classList.add("big"); });
+document.addEventListener("pointerout", e => { if (e.target.closest("a,button,label,input,textarea")) ring.classList.remove("big"); });
+addEventListener("pointerdown", e => { for (let i=0;i<14;i++) sparks.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*4,vy:(Math.random()-.7)*4,r:Math.random()*3+1.5,l:1}); });
+
+/* ============ הטיית תלת-ממד עדינה (הזמנה + לוגו) ============ */
+function tilt(box, inner, max){
+  box.addEventListener("pointermove", e => {
+    const r = box.getBoundingClientRect(), x = (e.clientX-r.left)/r.width, y = (e.clientY-r.top)/r.height;
+    inner.style.transform = `rotateY(${(x-.5)*max}deg) rotateX(${(.5-y)*max}deg)`;
+    inner.style.setProperty("--gx", x*100+"%"); inner.style.setProperty("--gy", y*100+"%");
+  });
+  box.addEventListener("pointerleave", () => inner.style.transform = "");
+}
+tilt($("#logoWrap"), $("#logo"), 14);
+
+/* ============ חשיפת הלוגו אחרי אישור ============ */
+function revealLogo(){
+  setTimeout(() => {
+    $("#logo").classList.add("in"); $("#logoWrap").classList.add("in");
+    const r = $("#logo").getBoundingClientRect();
+    for (let i=0;i<40;i++) setTimeout(() => sparks.push({x:r.left+Math.random()*r.width,y:r.top+Math.random()*r.height,vx:(Math.random()-.5)*1.2,vy:-Math.random()*1.2,r:Math.random()*3+1.5,l:1}), i*45);
+  }, 700);
+}
+
+/* ============ טופס ============ */
+let n = 1;
+const setN = v => { n = Math.max(1, Math.min(15, v)); $("#count").textContent = n; };
+$("#plus").onclick = () => setN(n+1); $("#minus").onclick = () => setN(n-1);
+document.querySelectorAll("[name=att]").forEach(r => r.onchange = () => $("#countBox").classList.toggle("hide", $("#no").checked));
+
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("#name").value.trim(), coming = $("#yes").checked, msg = $("#msg").value.trim();
+  const err = $("#err"); err.textContent = "";
+  if (name.length < 2) return err.textContent = "נא למלא שם מלא";
+
+  const text = `🎉 <b>אישור הגעה – פדיון הבן אריאל</b>\n\n` +
+    `👤 <b>שם:</b> ${esc(name)}\n` +
+    (coming ? `✅ <b>מגיעים:</b> ${n} אנשים\n` : `❌ <b>לא מגיעים</b>\n`) +
+    (msg ? `💌 <b>ברכה:</b> ${esc(msg)}\n` : "");
+
+  const btn = $("#send"); btn.disabled = true; btn.textContent = "שולח…";
+  try {
+    const res = CONFIG.PROXY_URL
+      ? await fetch(CONFIG.PROXY_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({text})})
+      : await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {method:"POST", headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({chat_id:CONFIG.TELEGRAM_CHAT_ID, text, parse_mode:"HTML"})});
+    if (!res.ok) throw new Error(res.status);
+    $("#thanksTxt").textContent = coming ? "נשמח לראותכם בשמחה!" : "תודה שעדכנתם. נעדרתם – ובכל זאת שמחנו לשמוע.";
+    $("#form").classList.add("done"); revealLogo();
+    $("#form").scrollIntoView({behavior:"smooth",block:"start"});
+    const r = $("#form").getBoundingClientRect();
+    for (let i=0;i<60;i++) setTimeout(() => sparks.push({x:r.left+r.width/2,y:r.top+r.height/2,vx:(Math.random()-.5)*7,vy:(Math.random()-.8)*6,r:Math.random()*3.5+1.5,l:1}), i*12);
+  } catch(x){
+    err.textContent = "אירעה שגיאה בשליחה. נא לנסות שוב.";
+    btn.disabled = false; btn.textContent = "שליחת אישור הגעה";
+  }
+});
+</script>
+</body>
+</html>
