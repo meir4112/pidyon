@@ -94,7 +94,7 @@ input:focus,textarea:focus{border-color:var(--gold2);box-shadow:0 0 0 4px #d4a24
 .choice label{margin:0;text-align:center;padding:12px;border-radius:12px;border:1.5px solid #f3d58a77;cursor:pointer;color:var(--cream);transition:.25s;background:#0d2f3a55}
 .choice input:checked+label{background:var(--gold);color:var(--deep);border-color:var(--gold2);box-shadow:0 8px 20px #d4a24a44}
 .choice input:focus-visible+label{outline:3px solid var(--teal);outline-offset:2px}
-.stepper{display:flex;align-items:center;justify-content:center;gap:18px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:12px}
 .stepper button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold2);background:#0d2f3a55;color:var(--gold2);font-size:1.5rem;cursor:pointer;transition:.2s}
 .stepper button:hover{background:var(--gold);color:var(--deep)}
 .stepper output{min-width:2ch;text-align:center;font-size:2rem;font-weight:900;color:var(--gold2)}
@@ -204,11 +204,7 @@ footer{padding:50px 20px 70px;text-align:center;color:var(--gold2);font-size:1.3
 <script>
 /* ============ הגדרות ============ */
 const CONFIG = {
-  // אפשרות 1 (מומלצת): כתובת Proxy משלכם (למשל Cloudflare Worker) שמחזיק את הטוקן בצד שרת.
-  PROXY_URL: "https://rough-water-f5ad.meshidesign100.workers.dev",
-  // אפשרות 2: ישיר לטלגרם. שימו לב: הטוקן יהיה גלוי בקוד האתר.
-  TELEGRAM_BOT_TOKEN: "PUT_YOUR_BOT_TOKEN_HERE",
-  TELEGRAM_CHAT_ID: "PUT_YOUR_CHAT_ID_HERE",
+  WORKER_URL: "https://rsvp.YOUR-NAME.workers.dev", // כתובת ה-Worker שלכם
 };
 
 const $ = s => document.querySelector(s);
@@ -217,7 +213,7 @@ const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c
 /* ============ קישורים ============ */
 const MAPS = "https://maps.app.goo.gl/amgqJUJ9M7x4FU9j9";
 document.querySelectorAll(".gmaps").forEach(a => a.href = MAPS);
-document.querySelectorAll(".waze").forEach(a => a.href = "https://waze.com/ul?q=" + encodeURIComponent("אוהל יעקב, אביי ורבא, מודיעין עילית") + "&navigate=yes");
+document.querySelectorAll(".waze").forEach(a => a.href = "https://waze.com/ul?q=" + encodeURIComponent("אולמי אוהלי מרים, אביי ורבא, מודיעין עילית") + "&navigate=yes");
 $("#gcal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
   encodeURIComponent("פדיון הבן – אריאל עושרי") +
   "&dates=20261024T213000/20261025T000000&ctz=Asia/Jerusalem&location=" +
@@ -291,20 +287,15 @@ document.querySelectorAll("[name=att]").forEach(r => r.onchange = () => $("#coun
 $("#form").addEventListener("submit", async e => {
   e.preventDefault();
   const name = $("#name").value.trim(), coming = $("#yes").checked, msg = $("#msg").value.trim();
-  const err = $("#err"); err.textContent = "";
+  const err = $("#err"), btn = $("#send"); err.textContent = "";
   if (name.length < 2) return err.textContent = "נא למלא שם מלא";
 
-  const text = `🎉 <b>אישור הגעה – פדיון הבן אריאל</b>\n\n` +
-    `👤 <b>שם:</b> ${esc(name)}\n` +
-    (coming ? `✅ <b>מגיעים:</b> ${n} אנשים\n` : `❌ <b>לא מגיעים</b>\n`) +
-    (msg ? `💌 <b>ברכה:</b> ${esc(msg)}\n` : "");
-
-  const btn = $("#send"); btn.disabled = true; btn.textContent = "שולח…";
+  btn.disabled = true; btn.textContent = "שולח…";
+  const reset = () => { btn.disabled = false; btn.textContent = "שליחת אישור הגעה"; };
   try {
-    const res = CONFIG.PROXY_URL
-      ? await fetch(CONFIG.PROXY_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({text})})
-      : await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {method:"POST", headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({chat_id:CONFIG.TELEGRAM_CHAT_ID, text, parse_mode:"HTML"})});
+    const res = await fetch(CONFIG.WORKER_URL, {method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({name, coming, guests:n, msg})});
+    if (res.status === 409){ err.textContent = "כבר נרשמתם"; return reset(); }
     if (!res.ok) throw new Error(res.status);
     $("#thanksTxt").textContent = coming ? "נשמח לראותכם בשמחה!" : "תודה שעדכנתם. נעדרתם – ובכל זאת שמחנו לשמוע.";
     $("#form").classList.add("done"); revealLogo();
@@ -312,8 +303,7 @@ $("#form").addEventListener("submit", async e => {
     const r = $("#form").getBoundingClientRect();
     for (let i=0;i<60;i++) setTimeout(() => sparks.push({x:r.left+r.width/2,y:r.top+r.height/2,vx:(Math.random()-.5)*7,vy:(Math.random()-.8)*6,r:Math.random()*3.5+1.5,l:1}), i*12);
   } catch(x){
-    err.textContent = "אירעה שגיאה בשליחה. נא לנסות שוב.";
-    btn.disabled = false; btn.textContent = "שליחת אישור הגעה";
+    err.textContent = "אירעה שגיאה בשליחה. נא לנסות שוב."; reset();
   }
 });
 </script>
