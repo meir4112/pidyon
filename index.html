@@ -227,7 +227,7 @@ const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c
 /* ============ קישורים ============ */
 const MAPS = "https://maps.app.goo.gl/amgqJUJ9M7x4FU9j9";
 document.querySelectorAll(".gmaps").forEach(a => a.href = MAPS);
-document.querySelectorAll(".waze").forEach(a => a.href = "https://waze.com/ul?q=" + encodeURIComponent("אולמי אוהלי מרים, אביי ורבא, מודיעין עילית") + "&navigate=yes");
+document.querySelectorAll(".waze").forEach(a => a.href = "https://waze.com/ul?q=" + encodeURIComponent("אוהל יעקב, אביי ורבא, מודיעין עילית") + "&navigate=yes");
 $("#gcal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" +
   encodeURIComponent("פדיון הבן – אריאל עושרי") +
   "&dates=20261024T213000/20261025T000000&ctz=Asia/Jerusalem&location=" +
